@@ -9,158 +9,245 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+            background: radial-gradient(circle at center, #0d1527 0%, #04060a 100%);
             color: #ffffff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 30px 20px;
             overflow-x: hidden;
+            perspective: 1000px; /* Включаем 3D-пространство для всей страницы */
         }
 
-        /* Эффект мерцающих звезд на фоне */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+        /* Интерактивный живой космический фон */
+        .space-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: transparent url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1000') repeat;
-            opacity: 0.15;
+            opacity: 0.18;
             z-index: -1;
+            transform: translateZ(-200px) scale(2); /* Отодвигаем фон назад в 3D */
         }
 
-        .container {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 40px 30px;
+        /* Главная 3D Карта-Контейнер */
+        .card-3d {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 30px;
+            padding: 45px 35px;
             width: 100%;
-            max-width: 480px;
+            max-width: 440px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            
+            /* Эффект глубокой трехмерной тени и парения */
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+            
+            /* Стартовый эффект 3D наклона */
+            transform: rotateX(6deg) rotateY(-4deg);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+            transform-style: preserve-3d;
         }
 
-        .avatar {
-            width: 100px;
-            height: 100px;
+        /* При наведении карточка слегка реагирует */
+        .card-3d:hover {
+            box-shadow: 
+                0 40px 80px rgba(99, 102, 241, 0.25),
+                0 0 40px rgba(255, 0, 127, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        /* Объёмная парящая аватарка */
+        .avatar-3d {
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #ff007f, #7f00ff);
-            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #ff007f 0%, #7f00ff 100%);
+            margin: 0 auto 25px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 40px;
-            box-shadow: 0 0 25px rgba(127, 0, 255, 0.6);
+            font-size: 48px;
+            
+            /* Выдавливание объекта вперед в 3D пространство */
+            transform: translateZ(40px);
+            box-shadow: 
+                0 15px 30px rgba(127, 0, 255, 0.5),
+                0 0 50px rgba(255, 0, 127, 0.3);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateZ(40px) translateY(0px); }
+            50% { transform: translateZ(45px) translateY(-8px); }
         }
 
         h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, #fff, #a5b4fc);
+            font-size: 26px;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 30%, #c7d2fe 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            transform: translateZ(30px); /* Текст выпирает вперед */
         }
 
         .subtitle {
             color: #94a3b8;
             font-size: 15px;
-            margin-bottom: 30px;
+            line-height: 1.5;
+            margin-bottom: 35px;
+            transform: translateZ(25px);
         }
 
         .section-title {
-            font-size: 14px;
+            font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #6366f1;
-            margin-bottom: 15px;
-            font-weight: 600;
+            letter-spacing: 2.5px;
+            color: #818cf8;
+            margin-bottom: 18px;
+            font-weight: 700;
+            transform: translateZ(20px);
         }
 
-        /* Кнопки соцсетей и услуг */
         .links-container {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 16px;
             margin-bottom: 35px;
+            transform: translateZ(20px);
         }
 
+        /* Общие 3D-кнопки */
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 16px;
+            padding: 18px;
             text-decoration: none;
             color: white;
-            border-radius: 14px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Стили для разных кнопок */
+        /* 3D Главная кнопка заказа */
         .btn-primary {
-            background: linear-gradient(45deg, #4f46e5, #7c3aed);
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            box-shadow: 
+                0 6px 20px rgba(99, 102, 241, 0.4),
+                0 3px 0 #3b1fb0; /* Имитация нижней грани кнопки */
+            transform: translateZ(15px);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+            transform: translateZ(25px) translateY(-3px);
+            box-shadow: 
+                0 12px 28px rgba(99, 102, 241, 0.6),
+                0 5px 0 #3b1fb0;
         }
 
-        .btn-social {
-            background: rgba(255, 255, 255, 0.05);
+        .btn-primary:active {
+            transform: translateZ(10px) translateY(1px);
+            box-shadow: 0 3px 10px rgba(99, 102, 241, 0.4);
         }
 
-        .btn-social:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-            border-color: rgba(255, 255, 255, 0.2);
+        /* 3D Социальная кнопка TikTok */
+        .btn-tiktok {
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transform: translateZ(15px);
+        }
+
+        .btn-tiktok:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateZ(25px) translateY(-2px);
+            border-color: rgba(0, 242, 234, 0.5);
+            box-shadow: 
+                -3px -3px 0 rgba(255, 0, 80, 0.5), 
+                3px 3px 0 rgba(0, 242, 234, 0.5),
+                0 10px 20px rgba(0, 0, 0, 0.3); /* Фирменный глитч-эффект TikTok */
         }
 
         .footer {
             font-size: 12px;
-            color: #64748b;
-            margin-top: 20px;
+            color: #475569;
+            margin-top: 15px;
+            transform: translateZ(10px);
+        }
+        
+        /* Мягкое свечение внутри карточки */
+        .glow {
+            position: absolute;
+            width: 100%; height: 100%;
+            top: 0; left: 0;
+            background: radial-gradient(circle at 50% 10%, rgba(124, 58, 237, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+            border-radius: 30px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Твой логотип или иконка -->
-        <div class="avatar">✨</div>
+    <div class="space-bg"></div>
+
+    <div class="card-3d" id="card">
+        <div class="glow"></div>
         
-        <!-- Заголовок (впиши сюда свое имя или название бренда) -->
-        <h1>Твоё Имя / Название</h1>
-        <p class="subtitle">Официальная продажа и регистрация звёзд в космическом пространстве 🌌</p>
+        <div class="avatar-3d">✨</div>
         
-        <!-- Блок заказа -->
+        <h1>sqwizyslab</h1>
+        <p class="subtitle">Официальная продажа и моментальная регистрация звёзд в космическом пространстве 🌌</p>
+        
         <div class="section-title">Купить звезду</div>
         <div class="links-container">
-            <!-- Ссылку ниже можно заменить на твой Телеграм или форму -->
-            <a href="https://t.me/твой_юзернейм" target="_blank" class="btn btn-primary">⭐ Оформить заказ (Telegram)</a>
+            <a href="https://t.me/sqwizyslab" target="_blank" class="btn btn-primary">⭐ Оформить заказ (Telegram)</a>
         </div>
 
-        <!-- Блок соцсетей -->
         <div class="section-title">Мои соцсети</div>
         <div class="links-container">
-            <a href="https://instagram.com/твой_профиль" target="_blank" class="btn btn-social">📸 Instagram</a>
-            <a href="https://vk.com/твой_профиль" target="_blank" class="btn btn-social">📱 ВКонтакте</a>
-            <a href="https://www.tiktok.com/@sqwizyslab?_r=1&_t=ZT-97QZhThU9ld" target="_blank" class="btn btn-social">🎵 TikTok</a>
+            <a href="https://tiktok.com/@sqwizyslab" target="_blank" class="btn btn-tiktok">🎵 TikTok (@sqwizyslab)</a>
         </div>
 
         <div class="footer">
-            © 2026 Все права защищены. Подари частичку космоса.
+            © 2026 sqwizyslab. Подари частичку вселенной.
         </div>
     </div>
+
+    <script>
+        const card = document.getElementById('card');
+        document.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            card.style.transform = `rotateY(${-xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+        
+        // Возвращаем в исходное положение, когда мышь уходит с экрана
+        document.addEventListener('mouseleave', () => {
+            card.style.transform = `rotateX(6deg) rotateY(-4deg)`;
+            card.style.transition = "transform 0.5s ease";
+        });
+        
+        document.addEventListener('mouseenter', () => {
+            card.style.transition = "none";
+        });
+    </script>
 
 </body>
 </html>
