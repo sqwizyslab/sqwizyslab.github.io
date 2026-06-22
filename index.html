@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Купить Звезду | Официальный звездный каталог</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Эффект мерцающих звезд на фоне */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: transparent url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1000') repeat;
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff007f, #7f00ff);
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            box-shadow: 0 0 25px rgba(127, 0, 255, 0.6);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 15px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #6366f1;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* Кнопки соцсетей и услуг */
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            text-decoration: none;
+            color: white;
+            border-radius: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Стили для разных кнопок */
+        .btn-primary {
+            background: linear-gradient(45deg, #4f46e5, #7c3aed);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-social {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-social:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .footer {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Твой логотип или иконка -->
+        <div class="avatar">✨</div>
+        
+        <!-- Заголовок (впиши сюда свое имя или название бренда) -->
+        <h1>Твоё Имя / Название</h1>
+        <p class="subtitle">Официальная продажа и регистрация звёзд в космическом пространстве 🌌</p>
+        
+        <!-- Блок заказа -->
+        <div class="section-title">Купить звезду</div>
+        <div class="links-container">
+            <!-- Ссылку ниже можно заменить на твой Телеграм или форму -->
+            <a href="https://t.me/твой_юзернейм" target="_blank" class="btn btn-primary">⭐ Оформить заказ (Telegram)</a>
+        </div>
+
+        <!-- Блок соцсетей -->
+        <div class="section-title">Мои соцсети</div>
+        <div class="links-container">
+            <a href="https://instagram.com/твой_профиль" target="_blank" class="btn btn-social">📸 Instagram</a>
+            <a href="https://vk.com/твой_профиль" target="_blank" class="btn btn-social">📱 ВКонтакте</a>
+            <a href="https://www.tiktok.com/@sqwizyslab?_r=1&_t=ZT-97QZhThU9ld" target="_blank" class="btn btn-social">🎵 TikTok</a>
+        </div>
+
+        <div class="footer">
+            © 2026 Все права защищены. Подари частичку космоса.
+        </div>
+    </div>
+
+</body>
+</html>
