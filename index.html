@@ -21,7 +21,7 @@
             align-items: center;
             padding: 30px 20px;
             overflow: hidden;
-            perspective: 1500px; /* Глубина для 3D переворота */
+            perspective: 1500px; 
         }
 
         /* --- БЕСШОВНЫЙ ПЛАВАЮЩИЙ КОСМОС --- */
@@ -29,48 +29,68 @@
             position: fixed;
             top: -10%; left: -10%; width: 120%; height: 120%;
             background: 
-                radial-gradient(circle at 15% 25%, rgba(36, 161, 222, 0.2) 0%, transparent 45%),
-                radial-gradient(circle at 85% 75%, rgba(127, 0, 255, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 15% 25%, rgba(36, 161, 222, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 85% 75%, rgba(127, 0, 255, 0.2) 0%, transparent 50%),
                 #060913;
-            z-index: -2;
-            animation: nebulaFloat 20s ease-in-out infinite;
+            z-index: -3;
+            animation: nebulaFloat 25s ease-in-out infinite;
         }
 
-        .stars-layer {
+        /* --- ЖИВЫЕ ПЛЫВУЩИЕ ЗВЕЗДЫ --- */
+        .stars-container {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-                radial-gradient(white, rgba(255,255,255,.1) 1px, transparent 30px);
-            background-size: 400px 400px;
-            z-index: -1;
-            opacity: 0.3;
-            animation: starsDrift 40s linear infinite;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .animated-star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff, 0 0 20px rgba(36, 161, 222, 0.6);
+            opacity: 0;
+            animation: flyUp linear infinite;
+        }
+
+        @keyframes flyUp {
+            0% {
+                transform: translateY(105vh) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-5vh) scale(1.2);
+                opacity: 0;
+            }
         }
 
         @keyframes nebulaFloat {
             0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-15px, 10px) scale(1.03); }
-        }
-
-        @keyframes starsDrift {
-            0% { background-position: 0 0; }
-            100% { background-position: 400px 400px; }
+            50% { transform: translate(-20px, 15px) scale(1.05); }
         }
 
         /* --- 3D КОНТЕЙНЕР ДЛЯ ПЕРЕВОРОТА --- */
         .card-container {
             width: 100%;
             max-width: 430px;
-            height: 520px;
+            height: 540px;
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Класс, который будет разворачивать карту при клике */
+        /* Класс поворота (добавляется через JS) */
         .card-container.flipped {
-            transform: rotateY(180deg);
+            transform: rotateY(180deg) !important; /* Важно !important, чтобы мышка не перебивала переворот */
         }
 
         /* Общие стили для обеих сторон */
@@ -78,11 +98,11 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            backface-visibility: hidden; /* Скрывает изнанку при повороте */
+            backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
-            background: rgba(20, 30, 43, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(10, 17, 31, 0.7);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 28px;
             padding: 40px 30px;
@@ -91,23 +111,22 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
         }
 
-        /* --- ЛИЦЕВАЯ СТОРОНА (Твой первый дизайн) --- */
+        /* Лицевая */
         .card-front {
             z-index: 2;
             transform: rotateY(0deg);
         }
 
-        /* --- ОБРАТНАЯ СТОРОНА (Прайс-лист в твоем стиле) --- */
+        /* Обратная */
         .card-back {
             transform: rotateY(180deg);
             justify-content: flex-start;
-            overflow-y: auto; /* На случай, если прайс большой */
+            overflow-y: auto;
         }
 
-        /* Кастомный красивый скроллбар для прайса */
         .card-back::-webkit-scrollbar {
             width: 4px;
         }
@@ -116,37 +135,35 @@
             border-radius: 4px;
         }
 
-        /* Парящая иконка */
-        .avatar-3d {
-            width: 95px;
-            height: 95px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ff007f 0%, #7f00ff 100%);
+        /* ОБНОВЛЕННАЯ СТИЛЬНАЯ ИКОНКА-ЗВЕЗДА */
+        .star-logo-container {
+            width: 100px;
+            height: 100px;
             margin-bottom: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 44px;
-            box-shadow: 0 10px 25px rgba(127, 0, 255, 0.3);
+            filter: drop-shadow(0 10px 20px rgba(36, 161, 222, 0.4));
             animation: float 4s ease-in-out infinite;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-6px); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(3deg); }
         }
 
         h1 {
-            font-size: 26px;
+            font-size: 28px;
             margin-bottom: 8px;
             color: #fff;
             font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .subtitle {
             color: #94a3b8;
             font-size: 14px;
-            line-height: 1.4;
+            line-height: 1.5;
             margin-bottom: 30px;
         }
 
@@ -166,7 +183,6 @@
             width: 100%;
         }
 
-        /* Стили кнопок */
         .btn {
             display: flex;
             align-items: center;
@@ -212,7 +228,7 @@
             transform: translateY(-2px);
         }
 
-        /* --- СТИЛЬ ПРАЙС-ЛИСТА (Твой собственный стиль) --- */
+        /* --- ПРАЙС-ЛИСТ --- */
         .custom-price-list {
             width: 100%;
             display: flex;
@@ -277,12 +293,24 @@
 <body>
 
     <div class="space-bg"></div>
-    <div class="stars-layer"></div>
+    <div class="stars-container" id="starsContainer"></div>
 
     <div class="card-container" id="cardContainer">
         
         <div class="card-front">
-            <div class="avatar-3d">✨</div>
+            <div class="star-logo-container">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                    <defs>
+                        <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#00f0ff" />
+                            <stop offset="50%" stop-color="#24a1de" />
+                            <stop offset="100%" stop-color="#7f00ff" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" fill="url(#starGrad)"/>
+                </svg>
+            </div>
+
             <h1>sqwizyslab</h1>
             <p class="subtitle">Официальная продажа и моментальная регистрация звёзд в космическом пространстве 🌌</p>
             
@@ -351,21 +379,60 @@
 
     <script>
         const cardContainer = document.getElementById('cardContainer');
+        const starsContainer = document.getElementById('starsContainer');
         
-        function toggleFlip() {
-            cardContainer.classList.toggle('flipped');
+        // --- ГЕНЕРАЦИЯ ЖИВЫХ ЗВЕЗД ---
+        const STAR_COUNT = 50; // Сколько звезд пустить по экрану
+        for (let i = 0; i < STAR_COUNT; i++) {
+            const star = document.createElement('div');
+            star.classList.add('animated-star');
+            
+            // Случайные размеры, координаты по ширине экрана и задержки анимаций
+            const size = Math.random() * 3 + 1; // от 1px до 4px
+            const leftPos = Math.random() * 100; // от 0% до 100%
+            const duration = Math.random() * 15 + 10; // скорость полета от 10с до 25с
+            const delay = Math.random() * -25; // отрицательный делей, чтобы звезды плыли сразу при загрузке
+            
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${leftPos}%`;
+            star.style.animationDuration = `${duration}s`;
+            star.style.animationDelay = `${delay}s`;
+            
+            starsContainer.appendChild(star);
         }
 
-        // Легкий интерактивный наклон карты за мышкой на ПК
+        // --- ПЕРЕВОРОТ КАРТОЧКИ ---
+        function toggleFlip() {
+            cardContainer.classList.toggle('flipped');
+            // Сбрасываем 3D наклон при перевороте, чтобы не было визуальных багов
+            if(cardContainer.classList.contains('flipped')) {
+                cardContainer.style.transform = 'rotateY(180deg)';
+            } else {
+                cardContainer.style.transform = 'rotateY(0deg) rotateX(0deg)';
+            }
+        }
+
+        // --- ЧЕСТНЫЙ ИНТЕРАКТИВНЫЙ 3D-НАКЛОН КАРТЫ ---
         document.addEventListener('mousemove', (e) => {
-            // Работает только если карта не перевернута, чтобы не ломать анимацию
+            // Работает только если карта НЕ перевернута
             if(!cardContainer.classList.contains('flipped')) {
-                const xAxis = (window.innerWidth / 2 - e.pageX) / 35;
-                const yAxis = (window.innerHeight / 2 - e.pageY) / 35;
-                cardContainer.style.transform = `rotateY(${-xAxis}deg) rotateX(${yAxis}deg)`;
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                
+                // Вычисляем отклонение курсора от центра экрана (значения от -0.5 до 0.5)
+                const offsetX = (e.clientX / width) - 0.5;
+                const offsetY = (e.clientY / height) - 0.5;
+                
+                // Умножаем на градусы максимального наклона (до 25 градусов)
+                const rotateY = offsetX * 25;
+                const rotateX = -offsetY * 25; // инвертируем ось Y, чтобы карта шла за мышью
+                
+                cardContainer.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
             }
         });
 
+        // Возвращаем в исходное положение, когда мышь уходит с экрана
         document.addEventListener('mouseleave', () => {
             if(!cardContainer.classList.contains('flipped')) {
                 cardContainer.style.transform = `rotateX(0deg) rotateY(0deg)`;
