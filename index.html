@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMM & Stars Store</title>
+    <title>sqwizy | shop</title>
     <style>
         * {
             margin: 0;
@@ -33,15 +33,9 @@
             color: #38bdf8;
         }
 
-        .nav-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-            margin-left: 20px;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #38bdf8;
+        .nav-links {
+            display: flex;
+            align-items: center;
         }
 
         .btn-auth {
@@ -206,41 +200,33 @@
 </head>
 <body>
 
-    <!-- Шапка сайта -->
     <header>
-        <div class="logo">🚀 SMM STORE</div>
+        <div class="logo">🚀 sqwizy | shop</div>
         <nav class="nav-links">
-            <a href="#services">Услуги</a>
-            <a href="#socials">Контакты</a>
             <button class="btn-auth" onclick="toggleModal()">Войти / Регистрация</button>
         </nav>
     </header>
 
-    <!-- Главный баннер -->
     <section class="hero">
         <h1>Прокачай свой Telegram на максимум</h1>
         <p>Быстрая накрутка подписчиков и продажа Telegram Stars по лучшим ценам</p>
     </section>
 
-    <!-- Раздел услуг -->
-    <section class="services" id="services">
+    <section class="services">
         <h2>Наши Услуги</h2>
         <div class="grid">
-            <!-- Карточка 1 -->
             <div class="card">
                 <h3>Звезды Telegram ⭐</h3>
                 <p>Официальные звезды для покупки контента и поддержки авторов.</p>
                 <div class="price">от 199 ₽</div>
                 <button class="btn-buy" onclick="alert('Для покупки свяжитесь в Telegram')">Купить</button>
             </div>
-            <!-- Карточка 2 -->
             <div class="card">
                 <h3>Накрутка подписчиков 👥</h3>
                 <p>Быстрый приход, высокое качество, без отписок.</p>
                 <div class="price">от 99 ₽ / 1000 шт</div>
                 <button class="btn-buy" onclick="alert('Для заказа свяжитесь в Telegram')">Заказать</button>
             </div>
-            <!-- Карточка 3 -->
             <div class="card">
                 <h3>Накрутка просмотров 👀</h3>
                 <p>Подними охваты на своих постах за считанные минуты.</p>
@@ -250,18 +236,15 @@
         </div>
     </section>
 
-    <!-- Мои соцсети -->
-    <section class="socials" id="socials">
+    <section class="socials">
         <h2>Мои Соцсети / Связь</h2>
         <p style="color: #94a3b8; margin-bottom: 20px;">Подписывайся и пиши по всем вопросам:</p>
         <div class="social-buttons">
-            <!-- ЗАМЕНИ ССЫЛКИ НА СВОИ -->
-            <a href="https://t.me/ТВОЙ_НИК" target="_blank" class="tg-btn">✈️ Мой Telegram</a>
-            <a href="https://www.tiktok.com/@ТВОЙ_НИК" target="_blank" class="tt-btn">🎵 Мой TikTok</a>
+            <a href="https://t.me/sqwizyslab" target="_blank" class="tg-btn">✈️ Мой Telegram</a>
+            <a href="https://www.tiktok.com/@sqwizyslab?_r=1&_t=ZT-97QgL2r9wjt" target="_blank" class="tt-btn">🎵 Мой TikTok</a>
         </div>
     </section>
 
-    <!-- Модальное окно Авторизации -->
     <div class="modal" id="authModal">
         <div class="modal-content">
             <span class="close-btn" onclick="toggleModal()">&times;</span>
