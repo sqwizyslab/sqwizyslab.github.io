@@ -13,38 +13,69 @@
         }
 
         body {
-            background: radial-gradient(circle at center, #0d1527 0%, #04060a 100%);
+            background: radial-gradient(circle at center, #0b111e 0%, #020306 100%);
             color: #ffffff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 30px 20px;
-            overflow-x: hidden;
-            perspective: 1000px; /* Включаем 3D-пространство для всей страницы */
+            overflow: hidden; /* Скрываем полосы прокрутки из-за анимации фона */
+            perspective: 1000px; /* Включаем 3D-пространство */
+            position: relative;
         }
 
-        /* Интерактивный живой космический фон */
-        .space-bg {
+        /* --- ПЛАВАЮЩИЙ КОСМИЧЕСКИЙ ФОН --- */
+        
+        /* Слой 1: Мелкие далекие звезды */
+        .space-bg-1 {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: -50%; left: -50%; width: 200%; height: 200%;
             background: transparent url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1000') repeat;
-            opacity: 0.18;
-            z-index: -1;
-            transform: translateZ(-200px) scale(2); /* Отодвигаем фон назад в 3D */
+            opacity: 0.15;
+            z-index: -2;
+            animation: driftClockwise 40s linear infinite; /* Плавное круговое движение */
         }
+
+        /* Слой 2: Крупные более близкие звезды */
+        .space-bg-2 {
+            position: fixed;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: transparent url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=1000') repeat;
+            opacity: 0.08;
+            z-index: -1;
+            mix-blend-mode: color-dodge;
+            animation: driftCounterClockwise 60s linear infinite; /* Движение в другую сторону для глубины */
+        }
+
+        /* Анимации для плавающего космоса */
+        @keyframes driftClockwise {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            50% { transform: translate(40px, -30px) rotate(3deg) scale(1.05); }
+            100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+        }
+
+        @keyframes driftCounterClockwise {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1.1); }
+            50% { transform: translate(-30px, 40px) rotate(-3deg) scale(1); }
+            100% { transform: translate(0, 0) rotate(0deg) scale(1.1); }
+        }
+
+        /* ---------------------------------- */
 
         /* Главная 3D Карта-Контейнер */
         .card-3d {
             background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 30px;
             padding: 45px 35px;
             width: 100%;
             max-width: 440px;
             text-align: center;
+            position: relative;
+            z-index: 10;
             
             /* Эффект глубокой трехмерной тени и парения */
             box-shadow: 
@@ -205,21 +236,28 @@
 </head>
 <body>
 
-    <div class="space-bg"></div>
+    <!-- Подключаем два слоя плавающего космоса -->
+    <div class="space-bg-1"></div>
+    <div class="space-bg-2"></div>
 
+    <!-- Интерактивная 3D карточка -->
     <div class="card-3d" id="card">
         <div class="glow"></div>
         
+        <!-- Парящая аватарка -->
         <div class="avatar-3d">✨</div>
         
+        <!-- Имя/Никнейм -->
         <h1>sqwizyslab</h1>
         <p class="subtitle">Официальная продажа и моментальная регистрация звёзд в космическом пространстве 🌌</p>
         
+        <!-- Блок заказа -->
         <div class="section-title">Купить звезду</div>
         <div class="links-container">
             <a href="https://t.me/sqwizyslab" target="_blank" class="btn btn-primary">⭐ Оформить заказ (Telegram)</a>
         </div>
 
+        <!-- Блок соцсетей -->
         <div class="section-title">Мои соцсети</div>
         <div class="links-container">
             <a href="https://tiktok.com/@sqwizyslab" target="_blank" class="btn btn-tiktok">🎵 TikTok (@sqwizyslab)</a>
@@ -230,6 +268,7 @@
         </div>
     </div>
 
+    <!-- Скрипт для динамического 3D наклона за курсором мыши -->
     <script>
         const card = document.getElementById('card');
         document.addEventListener('mousemove', (e) => {
