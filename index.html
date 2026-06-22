@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Купить Звезду | Официальный звездный каталог</title>
+    <title>Купить Telegram Stars | sqwizyslab</title>
     <style>
         * {
             margin: 0;
@@ -13,128 +13,98 @@
         }
 
         body {
-            background-color: #020306;
+            background-color: #0a0e17;
             color: #ffffff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 30px 20px;
-            overflow: hidden; 
+            padding: 40px 20px;
+            overflow-x: hidden;
             perspective: 1000px;
             position: relative;
         }
 
-        /* --- ГАРАНТИРОВАННЫЙ ПЛАВАЮЩИЙ КОСМОС НА CSS --- */
+        /* --- ФОН С ПЛАВАЮЩИМИ СВЕТЯЩИМИСЯ ЗВЕЗДАМИ --- */
         .space-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 30% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(255, 0, 127, 0.1) 0%, transparent 45%),
-                radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 90px 110px, #fff, rgba(0,0,0,0)),
-                radial-gradient(1.5px 1.5px at 150px 210px, #a5b4fc, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 220px 140px, #fff, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 280px 20px, #ff007f, rgba(0,0,0,0));
-            background-size: 300px 300px;
+                radial-gradient(circle at 10% 20%, rgba(36, 161, 222, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(118, 75, 162, 0.15) 0%, transparent 40%),
+                radial-gradient(1px 1px at 30px 40px, #f1c40f, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 100px 150px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 200px 80px, #f39c12, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 280px 240px, #fff, rgba(0,0,0,0));
+            background-size: 250px 250px;
             z-index: -1;
-            animation: spaceFloat 25s ease-in-out infinite;
+            animation: spaceFloat 20s ease-in-out infinite;
         }
 
         @keyframes spaceFloat {
-            0%, 100% {
-                transform: scale(1) translate(0, 0) rotate(0deg);
-                background-position: 0px 0px, 0px 0px;
-            }
-            50% {
-                transform: scale(1.15) translate(20px, -15px) rotate(4deg);
-                background-position: 40px -20px, -20px 30px; /* Смещение слоев */
-            }
+            0%, 100% { transform: scale(1) translate(0, 0); }
+            50% { transform: scale(1.1) translate(15px, -15px); }
         }
-        /* ---------------------------------- */
 
-        /* Главная 3D Карта-Контейнер */
+        /* Главная 3D Карта */
         .card-3d {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 30px;
-            padding: 45px 35px;
+            background: rgba(24, 34, 46, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 35px 25px;
             width: 100%;
-            max-width: 440px;
+            max-width: 460px;
             text-align: center;
-            position: relative;
-            z-index: 10;
-            
-            box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.6),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.4);
-            
-            transform: rotateX(6deg) rotateY(-4deg);
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            transform: rotateX(4deg) rotateY(-2deg);
+            transition: transform 0.4s ease;
             transform-style: preserve-3d;
         }
 
-        .card-3d:hover {
-            box-shadow: 
-                0 40px 80px rgba(99, 102, 241, 0.25),
-                0 0 40px rgba(255, 0, 127, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-
-        /* Объёмная парящая аватарка */
+        /* Парящая иконка Telegram Star */
         .avatar-3d {
-            width: 110px;
-            height: 110px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #ff007f 0%, #7f00ff 100%);
-            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
+            margin: 0 auto 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 48px;
-            
+            font-size: 44px;
             transform: translateZ(40px);
-            box-shadow: 
-                0 15px 30px rgba(127, 0, 255, 0.5),
-                0 0 50px rgba(255, 0, 127, 0.3);
-            animation: float 4s ease-in-out infinite;
+            box-shadow: 0 10px 25px rgba(241, 196, 15, 0.4);
+            animation: float 3.5s ease-in-out infinite;
         }
 
         @keyframes float {
             0%, 100% { transform: translateZ(40px) translateY(0px); }
-            50% { transform: translateZ(45px) translateY(-8px); }
+            50% { transform: translateZ(45px) translateY(-6px); }
         }
 
         h1 {
             font-size: 26px;
-            margin-bottom: 12px;
-            letter-spacing: 0.5px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffffff 30%, #c7d2fe 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            color: #fff;
             transform: translateZ(30px);
         }
 
         .subtitle {
-            color: #94a3b8;
-            font-size: 15px;
-            line-height: 1.5;
-            margin-bottom: 35px;
+            color: #8e96a0;
+            font-size: 14px;
+            margin-bottom: 25px;
+            line-height: 1.4;
             transform: translateZ(25px);
         }
 
         .section-title {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 2.5px;
-            color: #818cf8;
-            margin-bottom: 18px;
+            letter-spacing: 2px;
+            color: #24a1de;
+            margin: 25px 0 15px;
             font-weight: 700;
             transform: translateZ(20px);
         }
@@ -142,74 +112,112 @@
         .links-container {
             display: flex;
             flex-direction: column;
-            gap: 16px;
-            margin-bottom: 35px;
+            gap: 12px;
             transform: translateZ(20px);
         }
 
+        /* Кнопки */
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 18px;
+            padding: 15px;
             text-decoration: none;
             color: white;
-            border-radius: 16px;
+            border-radius: 14px;
             font-weight: 600;
-            font-size: 16px;
-            letter-spacing: 0.5px;
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-            box-shadow: 
-                0 6px 20px rgba(99, 102, 241, 0.4),
-                0 3px 0 #3b1fb0;
+            background: linear-gradient(135deg, #24a1de 0%, #1d82b3 100%);
+            box-shadow: 0 4px 15px rgba(36, 161, 222, 0.3);
             transform: translateZ(15px);
         }
 
         .btn-primary:hover {
-            transform: translateZ(25px) translateY(-3px);
-            box-shadow: 
-                0 12px 28px rgba(99, 102, 241, 0.6),
-                0 5px 0 #3b1fb0;
+            transform: translateZ(22px) translateY(-2px);
+            box-shadow: 0 8px 20px rgba(36, 161, 222, 0.5);
         }
 
         .btn-tiktok {
-            background: rgba(255, 255, 255, 0.04);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
             transform: translateZ(15px);
         }
 
         .btn-tiktok:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateZ(25px) translateY(-2px);
-            border-color: rgba(0, 242, 234, 0.5);
-            box-shadow: 
-                -3px -3px 0 rgba(255, 0, 80, 0.5), 
-                3px 3px 0 rgba(0, 242, 234, 0.5),
-                0 10px 20px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateZ(22px) translateY(-2px);
+            border-color: rgba(0, 242, 234, 0.4);
+        }
+
+        /* --- КРАСИВЫЙ СТИЛЬНЫЙ ПРАЙС-ЛИСТ --- */
+        .price-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+            transform: translateZ(15px);
+        }
+
+        .price-item {
+            background: rgba(30, 42, 56, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .price-item:hover {
+            border-color: #f1c40f;
+            background: rgba(36, 51, 68, 0.9);
+            transform: scale(1.03);
+        }
+
+        .stars-count {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .stars-count::before {
+            content: "⭐";
+            font-size: 13px;
+        }
+
+        .money-value {
+            font-size: 13px;
+            color: #f1c40f;
+            margin-top: 3px;
+            font-weight: 600;
+        }
+
+        /* Информационная плашка про 1 звезду */
+        .rate-info {
+            grid-column: span 2;
+            background: rgba(241, 196, 15, 0.08);
+            border: 1px dashed rgba(241, 196, 15, 0.3);
+            border-radius: 12px;
+            padding: 10px;
+            font-size: 13px;
+            color: #f39c12;
+            font-weight: 600;
         }
 
         .footer {
-            font-size: 12px;
-            color: #475569;
-            margin-top: 15px;
+            font-size: 11px;
+            color: #5c6470;
+            margin-top: 25px;
             transform: translateZ(10px);
-        }
-        
-        .glow {
-            position: absolute;
-            width: 100%; height: 100%;
-            top: 0; left: 0;
-            background: radial-gradient(circle at 50% 10%, rgba(124, 58, 237, 0.15) 0%, transparent 60%);
-            pointer-events: none;
-            border-radius: 30px;
         }
     </style>
 </head>
@@ -218,38 +226,84 @@
     <div class="space-bg"></div>
 
     <div class="card-3d" id="card">
-        <div class="glow"></div>
-        
-        <div class="avatar-3d">✨</div>
+        <div class="avatar-3d">⭐️</div>
         
         <h1>sqwizyslab</h1>
-        <p class="subtitle">Официальная продажа и моментальная регистрация звёзд в космическом пространстве 🌌</p>
+        <p class="subtitle">Быстрая и надежная продажа Telegram Stars по самым выгодным ценам! 🚀</p>
         
-        <div class="section-title">Купить звезду</div>
+        <div class="section-title">Заказать</div>
         <div class="links-container">
-            <a href="https://t.me/sqwizyslab" target="_blank" class="btn btn-primary">⭐ Оформить заказ (Telegram)</a>
+            <a href="https://t.me/sqwizyslab" target="_blank" class="btn btn-primary">💬 Написать в Telegram (Заказ)</a>
+            <a href="https://tiktok.com/@sqwizyslab" target="_blank" class="btn btn-tiktok">🎵 Мы в TikTok</a>
         </div>
 
-        <div class="section-title">Мои соцсети</div>
-        <div class="links-container">
-            <a href="https://tiktok.com/@sqwizyslab" target="_blank" class="btn btn-tiktok">🎵 TikTok (@sqwizyslab)</a>
+        <div class="section-title">Цены на услуги</div>
+        <div class="price-grid">
+            
+            <div class="rate-info">
+                🔥 Курс: 1 звезда ≈ 1.36₽
+            </div>
+
+            <div class="price-item">
+                <div class="stars-count">50</div>
+                <div class="money-value">68₽</div>
+            </div>
+            <div class="price-item">
+                <div class="stars-count">100</div>
+                <div class="money-value">136₽</div>
+            </div>
+            <div class="price-item">
+                <div class="stars-count">150</div>
+                <div class="money-value">204₽</div>
+            </div>
+            <div class="price-item">
+                <div class="stars-count">250</div>
+                <div class="money-value">340₽</div>
+            </div>
+            <div class="price-item">
+                <div class="stars-count">350</div>
+                <div class="money-value">476₽</div>
+            </div>
+            <div class="price-item">
+                <div class="stars-count">500</div>
+                <div class="money-value">680₽</div>
+            </div>
+            <div class="price-item">
+                <div class="stars-count">750</div>
+                <div class="money-value">1020₽</div>
+            </div>
+            <div class="price-item">
+                <div class="stars-count">1000</div>
+                <div class="money-value">1360₽</div>
+            </div>
+            <div class="price-item">
+                <div class="stars-count">1500</div>
+                <div class="money-value">2040₽</div>
+            </div>
+            <div class="price-item">
+                <div class="stars-count">2500</div>
+                <div class="money-value">3400₽</div>
+            </div>
+            <div class="price-item" style="grid-column: span 2;">
+                <div class="stars-count">Свой объём? Напиши в ЛС!</div>
+            </div>
         </div>
 
         <div class="footer">
-            © 2026 sqwizyslab. Подари частичку вселенной.
+            © 2026 sqwizyslab. Быстрое зачисление на аккаунт.
         </div>
     </div>
 
     <script>
         const card = document.getElementById('card');
         document.addEventListener('mousemove', (e) => {
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 30;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 30;
             card.style.transform = `rotateY(${-xAxis}deg) rotateX(${yAxis}deg)`;
         });
         
         document.addEventListener('mouseleave', () => {
-            card.style.transform = `rotateX(6deg) rotateY(-4deg)`;
+            card.style.transform = `rotateX(4deg) rotateY(-2deg)`;
             card.style.transition = "transform 0.5s ease";
         });
         
