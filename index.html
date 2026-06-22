@@ -13,90 +13,141 @@
         }
 
         body {
-            background-color: #0a0e17;
+            background-color: #060913;
             color: #ffffff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
-            overflow-x: hidden;
-            perspective: 1000px;
-            position: relative;
+            padding: 30px 20px;
+            overflow: hidden;
+            perspective: 1500px; /* Глубина для 3D переворота */
         }
 
-        /* --- ФОН С ПЛАВАЮЩИМИ СВЕТЯЩИМИСЯ ЗВЕЗДАМИ --- */
+        /* --- БЕСШОВНЫЙ ПЛАВАЮЩИЙ КОСМОС --- */
         .space-bg {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: -10%; left: -10%; width: 120%; height: 120%;
             background: 
-                radial-gradient(circle at 10% 20%, rgba(36, 161, 222, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(118, 75, 162, 0.15) 0%, transparent 40%),
-                radial-gradient(1px 1px at 30px 40px, #f1c40f, rgba(0,0,0,0)),
-                radial-gradient(1.5px 1.5px at 100px 150px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 200px 80px, #f39c12, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 280px 240px, #fff, rgba(0,0,0,0));
-            background-size: 250px 250px;
+                radial-gradient(circle at 15% 25%, rgba(36, 161, 222, 0.2) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(127, 0, 255, 0.15) 0%, transparent 45%),
+                #060913;
+            z-index: -2;
+            animation: nebulaFloat 20s ease-in-out infinite;
+        }
+
+        .stars-layer {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                radial-gradient(white, rgba(255,255,255,.1) 1px, transparent 30px);
+            background-size: 400px 400px;
             z-index: -1;
-            animation: spaceFloat 20s ease-in-out infinite;
+            opacity: 0.3;
+            animation: starsDrift 40s linear infinite;
         }
 
-        @keyframes spaceFloat {
-            0%, 100% { transform: scale(1) translate(0, 0); }
-            50% { transform: scale(1.1) translate(15px, -15px); }
+        @keyframes nebulaFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-15px, 10px) scale(1.03); }
         }
 
-        /* Главная 3D Карта */
-        .card-3d {
-            background: rgba(24, 34, 46, 0.6);
+        @keyframes starsDrift {
+            0% { background-position: 0 0; }
+            100% { background-position: 400px 400px; }
+        }
+
+        /* --- 3D КОНТЕЙНЕР ДЛЯ ПЕРЕВОРОТА --- */
+        .card-container {
+            width: 100%;
+            max-width: 430px;
+            height: 520px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Класс, который будет разворачивать карту при клике */
+        .card-container.flipped {
+            transform: rotateY(180deg);
+        }
+
+        /* Общие стили для обеих сторон */
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; /* Скрывает изнанку при повороте */
+            -webkit-backface-visibility: hidden;
+            background: rgba(20, 30, 43, 0.75);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 35px 25px;
-            width: 100%;
-            max-width: 460px;
+            border-radius: 28px;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-            transform: rotateX(4deg) rotateY(-2deg);
-            transition: transform 0.4s ease;
-            transform-style: preserve-3d;
         }
 
-        /* Парящая иконка Telegram Star */
+        /* --- ЛИЦЕВАЯ СТОРОНА (Твой первый дизайн) --- */
+        .card-front {
+            z-index: 2;
+            transform: rotateY(0deg);
+        }
+
+        /* --- ОБРАТНАЯ СТОРОНА (Прайс-лист в твоем стиле) --- */
+        .card-back {
+            transform: rotateY(180deg);
+            justify-content: flex-start;
+            overflow-y: auto; /* На случай, если прайс большой */
+        }
+
+        /* Кастомный красивый скроллбар для прайса */
+        .card-back::-webkit-scrollbar {
+            width: 4px;
+        }
+        .card-back::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        /* Парящая иконка */
         .avatar-3d {
-            width: 90px;
-            height: 90px;
+            width: 95px;
+            height: 95px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
-            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #ff007f 0%, #7f00ff 100%);
+            margin-bottom: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 44px;
-            transform: translateZ(40px);
-            box-shadow: 0 10px 25px rgba(241, 196, 15, 0.4);
-            animation: float 3.5s ease-in-out infinite;
+            box-shadow: 0 10px 25px rgba(127, 0, 255, 0.3);
+            animation: float 4s ease-in-out infinite;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateZ(40px) translateY(0px); }
-            50% { transform: translateZ(45px) translateY(-6px); }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
         }
 
         h1 {
             font-size: 26px;
             margin-bottom: 8px;
             color: #fff;
-            transform: translateZ(30px);
+            font-weight: 700;
         }
 
         .subtitle {
-            color: #8e96a0;
+            color: #94a3b8;
             font-size: 14px;
-            margin-bottom: 25px;
             line-height: 1.4;
-            transform: translateZ(25px);
+            margin-bottom: 30px;
         }
 
         .section-title {
@@ -104,211 +155,221 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #24a1de;
-            margin: 25px 0 15px;
+            margin-bottom: 15px;
             font-weight: 700;
-            transform: translateZ(20px);
         }
 
         .links-container {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            transform: translateZ(20px);
+            gap: 14px;
+            width: 100%;
         }
 
-        /* Кнопки */
+        /* Стили кнопок */
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 15px;
+            padding: 16px;
             text-decoration: none;
             color: white;
-            border-radius: 14px;
+            border-radius: 15px;
             font-weight: 600;
             font-size: 15px;
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, #24a1de 0%, #1d82b3 100%);
-            box-shadow: 0 4px 15px rgba(36, 161, 222, 0.3);
-            transform: translateZ(15px);
+            box-shadow: 0 4px 15px rgba(36, 161, 222, 0.25);
         }
 
         .btn-primary:hover {
-            transform: translateZ(22px) translateY(-2px);
-            box-shadow: 0 8px 20px rgba(36, 161, 222, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(36, 161, 222, 0.4);
+        }
+
+        .btn-prices {
+            background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
+            color: #070b12;
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.2);
+        }
+
+        .btn-prices:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(241, 196, 15, 0.4);
         }
 
         .btn-tiktok {
             background: rgba(255, 255, 255, 0.03);
-            transform: translateZ(15px);
         }
 
         .btn-tiktok:hover {
             background: rgba(255, 255, 255, 0.08);
-            transform: translateZ(22px) translateY(-2px);
-            border-color: rgba(0, 242, 234, 0.4);
+            transform: translateY(-2px);
         }
 
-        /* --- КРАСИВЫЙ СТИЛЬНЫЙ ПРАЙС-ЛИСТ --- */
-        .price-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 10px;
-            transform: translateZ(15px);
-        }
-
-        .price-item {
-            background: rgba(30, 42, 56, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 12px;
+        /* --- СТИЛЬ ПРАЙС-ЛИСТА (Твой собственный стиль) --- */
+        .custom-price-list {
+            width: 100%;
             display: flex;
             flex-direction: column;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 14px 18px;
+            border-radius: 14px;
             transition: all 0.2s ease;
         }
 
-        .price-item:hover {
-            border-color: #f1c40f;
-            background: rgba(36, 51, 68, 0.9);
-            transform: scale(1.03);
+        .price-row:hover {
+            background: rgba(36, 161, 222, 0.08);
+            border-color: rgba(36, 161, 222, 0.3);
         }
 
-        .stars-count {
-            font-size: 15px;
+        .stars-badge {
             font-weight: 700;
-            color: #fff;
+            font-size: 16px;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
 
-        .stars-count::before {
-            content: "⭐";
-            font-size: 13px;
-        }
-
-        .money-value {
-            font-size: 13px;
+        .cost-badge {
             color: #f1c40f;
-            margin-top: 3px;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 16px;
+            background: rgba(241, 196, 15, 0.1);
+            padding: 4px 10px;
+            border-radius: 8px;
         }
 
-        /* Информационная плашка про 1 звезду */
-        .rate-info {
-            grid-column: span 2;
+        .rate-header {
             background: rgba(241, 196, 15, 0.08);
-            border: 1px dashed rgba(241, 196, 15, 0.3);
-            border-radius: 12px;
-            padding: 10px;
-            font-size: 13px;
+            border: 1px dashed rgba(241, 196, 15, 0.25);
             color: #f39c12;
             font-weight: 600;
+            font-size: 14px;
+            padding: 12px;
+            border-radius: 14px;
+            margin-bottom: 5px;
+            width: 100%;
         }
 
         .footer {
             font-size: 11px;
             color: #5c6470;
-            margin-top: 25px;
-            transform: translateZ(10px);
+            margin-top: auto;
+            padding-top: 20px;
         }
     </style>
 </head>
 <body>
 
     <div class="space-bg"></div>
+    <div class="stars-layer"></div>
 
-    <div class="card-3d" id="card">
-        <div class="avatar-3d">⭐️</div>
+    <div class="card-container" id="cardContainer">
         
-        <h1>sqwizyslab</h1>
-        <p class="subtitle">Быстрая и надежная продажа Telegram Stars по самым выгодным ценам! 🚀</p>
-        
-        <div class="section-title">Заказать</div>
-        <div class="links-container">
-            <a href="https://t.me/sqwizyslab" target="_blank" class="btn btn-primary">💬 Написать в Telegram (Заказ)</a>
-            <a href="https://tiktok.com/@sqwizyslab" target="_blank" class="btn btn-tiktok">🎵 Мы в TikTok</a>
-        </div>
-
-        <div class="section-title">Цены на услуги</div>
-        <div class="price-grid">
+        <div class="card-front">
+            <div class="avatar-3d">✨</div>
+            <h1>sqwizyslab</h1>
+            <p class="subtitle">Официальная продажа и моментальная регистрация звёзд в космическом пространстве 🌌</p>
             
-            <div class="rate-info">
-                🔥 Курс: 1 звезда ≈ 1.36₽
+            <div class="section-title">Навигация</div>
+            <div class="links-container">
+                <a href="https://t.me/sqwizyslab" target="_blank" class="btn btn-primary">⭐ Оформить заказ (Telegram)</a>
+                <button class="btn btn-prices" onclick="toggleFlip()">💰 Цены на услуги</button>
+                <a href="https://tiktok.com/@sqwizyslab" target="_blank" class="btn btn-tiktok">🎵 TikTok (@sqwizyslab)</a>
             </div>
-
-            <div class="price-item">
-                <div class="stars-count">50</div>
-                <div class="money-value">68₽</div>
-            </div>
-            <div class="price-item">
-                <div class="stars-count">100</div>
-                <div class="money-value">136₽</div>
-            </div>
-            <div class="price-item">
-                <div class="stars-count">150</div>
-                <div class="money-value">204₽</div>
-            </div>
-            <div class="price-item">
-                <div class="stars-count">250</div>
-                <div class="money-value">340₽</div>
-            </div>
-            <div class="price-item">
-                <div class="stars-count">350</div>
-                <div class="money-value">476₽</div>
-            </div>
-            <div class="price-item">
-                <div class="stars-count">500</div>
-                <div class="money-value">680₽</div>
-            </div>
-            <div class="price-item">
-                <div class="stars-count">750</div>
-                <div class="money-value">1020₽</div>
-            </div>
-            <div class="price-item">
-                <div class="stars-count">1000</div>
-                <div class="money-value">1360₽</div>
-            </div>
-            <div class="price-item">
-                <div class="stars-count">1500</div>
-                <div class="money-value">2040₽</div>
-            </div>
-            <div class="price-item">
-                <div class="stars-count">2500</div>
-                <div class="money-value">3400₽</div>
-            </div>
-            <div class="price-item" style="grid-column: span 2;">
-                <div class="stars-count">Свой объём? Напиши в ЛС!</div>
+            
+            <div class="footer">
+                © 2026 sqwizyslab. Подари частичку вселенной.
             </div>
         </div>
 
-        <div class="footer">
-            © 2026 sqwizyslab. Быстрое зачисление на аккаунт.
+        <div class="card-back">
+            <div class="section-title" style="margin-top: 10px; color: #f1c40f;">Наш прайс-лист</div>
+            
+            <div class="rate-header">
+                🔥 Выгодный курс: 1 Star ≈ 1.36₽
+            </div>
+
+            <div class="custom-price-list">
+                <div class="price-row">
+                    <span class="stars-badge">⭐️ 50</span>
+                    <span class="cost-badge">68₽</span>
+                </div>
+                <div class="price-row">
+                    <span class="stars-badge">⭐️ 100</span>
+                    <span class="cost-badge">136₽</span>
+                </div>
+                <div class="price-row">
+                    <span class="stars-badge">⭐️ 150</span>
+                    <span class="cost-badge">204₽</span>
+                </div>
+                <div class="price-row">
+                    <span class="stars-badge">⭐️ 250</span>
+                    <span class="cost-badge">340₽</span>
+                </div>
+                <div class="price-row">
+                    <span class="stars-badge">⭐️ 350</span>
+                    <span class="cost-badge">476₽</span>
+                </div>
+                <div class="price-row">
+                    <span class="stars-badge">⭐️ 500</span>
+                    <span class="cost-badge">680₽</span>
+                </div>
+                <div class="price-row">
+                    <span class="stars-badge">⭐️ 1000</span>
+                    <span class="cost-badge">1360₽</span>
+                </div>
+                <div class="price-row">
+                    <span class="stars-badge">⭐️ 2500</span>
+                    <span class="cost-badge">3400₽</span>
+                </div>
+            </div>
+
+            <button class="btn btn-tiktok" style="margin-top: 20px; width: 100%;" onclick="toggleFlip()">⬅️ Назад на главную</button>
+            
+            <div class="footer">
+                Любой другой объём сделаем в ЛС!
+            </div>
         </div>
+
     </div>
 
     <script>
-        const card = document.getElementById('card');
+        const cardContainer = document.getElementById('cardContainer');
+        
+        function toggleFlip() {
+            cardContainer.classList.toggle('flipped');
+        }
+
+        // Легкий интерактивный наклон карты за мышкой на ПК
         document.addEventListener('mousemove', (e) => {
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 30;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 30;
-            card.style.transform = `rotateY(${-xAxis}deg) rotateX(${yAxis}deg)`;
+            // Работает только если карта не перевернута, чтобы не ломать анимацию
+            if(!cardContainer.classList.contains('flipped')) {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 35;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 35;
+                cardContainer.style.transform = `rotateY(${-xAxis}deg) rotateX(${yAxis}deg)`;
+            }
         });
-        
+
         document.addEventListener('mouseleave', () => {
-            card.style.transform = `rotateX(4deg) rotateY(-2deg)`;
-            card.style.transition = "transform 0.5s ease";
-        });
-        
-        document.addEventListener('mouseenter', () => {
-            card.style.transition = "none";
+            if(!cardContainer.classList.contains('flipped')) {
+                cardContainer.style.transform = `rotateX(0deg) rotateY(0deg)`;
+            }
         });
     </script>
 
