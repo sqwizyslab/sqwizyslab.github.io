@@ -245,6 +245,103 @@
         .modal button:hover {
             background-color: #c084fc;
         }
+    /* Секция отзывов */
+        .reviews {
+            padding: 60px 5%;
+            background: linear-gradient(180deg, #090514 0%, #120d24 100%);
+            text-align: center;
+        }
+
+        .reviews h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #f3e8ff;
+        }
+
+        .reviews-container {
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .review-card {
+            background-color: #0c071c;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #2e1065;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .review-name {
+            font-weight: bold;
+            color: #c084fc;
+        }
+
+        .review-stars {
+            color: #fbbf24;
+        }
+
+        .review-text {
+            color: #cbd5e1;
+        }
+
+        /* Форма отзыва */
+        .review-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #120d24;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #4c1d95;
+            text-align: left;
+        }
+
+        .review-form h3 {
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .review-form input, .review-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #2e1065;
+            background-color: #090514;
+            color: white;
+            font-family: inherit;
+        }
+
+        .review-form textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .review-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #a855f7;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .review-form button:hover {
+            background-color: #c084fc;
+        }
     </style>
 </head>
 <body>
